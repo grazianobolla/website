@@ -1,0 +1,16 @@
+{
+  "name": "Graziano's Portfolio",
+  "short_name": "Graziano's Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#171d1c",
+  "theme_color": "#587b7f",
+  "icons": [
+    {
+      "src": "assets/images/icon.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ]
+}
