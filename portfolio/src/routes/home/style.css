@@ -6,14 +6,13 @@
 
 .welcome {
     text-align: left;
-    font-size: 48px;
+    font-size: 34px;
     font-weight: normal;
 }
 
 .home span {
-    color: var(--font-negative);
+    color: var(--font);
     background: var(--highlight);
-    font-style: italic;
 }
 
 .about_me_btn {
@@ -21,8 +20,8 @@
     text-decoration: none;
     padding: 12px;
     color: #fff;
-    border-radius: 3px;
-    background: var(--accent);
+    border-radius: var(--def-border-rad);
+    background: var(--primary);
     width: 300px;
     display: flex;
     justify-content: center;
@@ -55,6 +54,7 @@
 }
 
 .entry {
+    padding: 8px;
     text-align: center;
 }
 

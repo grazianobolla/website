@@ -64,8 +64,9 @@ const Home = ({ entries }) => {
 
             <a class={style.about_me_btn} href='/about-me'>Read more about me here!</a>
             <Externals />
+
             <hr />
-            <p style={{ textAlign: 'center', fontSize: '22px', marginBottom: '0px' }}>Latest posts:</p>
+            <p style={{ textAlign: 'left', fontSize: 'var(--font-size)', marginBottom: '0px' }}>Latest posts:</p>
             <EntryGrid entries={entries} />
         </div>
     );

@@ -17,7 +17,7 @@
 .entry_element {
     display: flex;
     flex-direction: row;
-    background-color: var(--accent);
+    background-color: var(--primary);
     align-items: center;
     padding: 0 10px 0 10px;
     overflow: hidden;
@@ -37,6 +37,7 @@
 
 .entry_element:global(#date) {
     margin-left: auto;
+    font-size: medium;
 }
 
 .entry_element img {
