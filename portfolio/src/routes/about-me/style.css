@@ -36,5 +36,5 @@
 
 .about_me_text span {
     background: var(--highlight);
-    color: var(--font-negative);
+    color: var(--font);
 }

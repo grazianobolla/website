@@ -1,15 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap');
 
 :root {
+  --def-border-rad: 0px;
+  --font-size: 20px;
+}
+
+:root {
   --primary: #645a8f;
   --highlight: rgba(0, 0, 0, 0);
   --background: #212121;
   --footer: #272727;
   --font: #ffffff;
   --font-negative: #ffffff;
-  --def-border-rad: 0px;
-  --font-size: 20px;
 }
+
+/* 
+[data-theme="light"] {
+  --primary: #645a8f;
+  --highlight: rgba(0, 0, 0, 0);
+  --background: #fff;
+  --footer: #f3f3f3;
+  --font: #262626;
+  --font-negative: #fff;
+} */
 
 a {
   text-decoration: none;
