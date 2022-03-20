@@ -59,6 +59,10 @@
     text-align: center;
 }
 
+.entry:hover {
+    background-color: var(--gray);
+}
+
 .entry img {
     height: 180px;
     width: auto;
@@ -67,7 +71,7 @@
 
 .entry p {
     font-weight: 500;
-    font-size: larger;
+    font-size: large;
 }
 
 .entrygrid {
