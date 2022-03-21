@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'preact/compat'
 import Markdown from 'preact-markdown'
 import Prism from 'prismjs';
 import { getRemoteData } from '../../utils/Remote'
 import { parseDate } from '../../utils/Utils';
+import { Component } from 'preact';
 
 import '../../styles/mod-prism-okaidia.css'
 import 'prismjs/components/prism-c';
@@ -11,31 +11,35 @@ import 'prismjs/components/prism-cpp';
 import style from './style.css'
 import { DiscussionEmbed } from '../../components/disqus';
 
-const Page = ({ entryid }) => {
-    const [entry, setEntry] = useState({});
+const markedOpts =
+{
+    highlight(code, lang) {
+        if (Prism.languages[lang])
+            return Prism.highlight(code, Prism.languages[lang], lang);
 
-    useEffect(() => {
-        async function fetchData() {
-            const info = await getRemoteData(entryid);
+        return Prism.highlight(code, Prism.languages['cpp'], 'cpp');
+    }
+};
 
-            if (info !== false)
-                setEntry({ ok: true, ...info });
-        }
+class Page extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { ok: false };
+    }
 
-        fetchData();
-    }, []);
+    async componentDidMount() {
+        const info = await getRemoteData(this.props.entryid);
 
-    const markedOpts =
-    {
-        highlight(code, lang) {
-            if (Prism.languages[lang])
-                return Prism.highlight(code, Prism.languages[lang], lang);
+        if (info !== false)
+            this.setState({ ok: true, ...info });
+    }
 
-            return Prism.highlight(code, Prism.languages['cpp'], 'cpp');
-        }
-    };
+    render() {
+        const entry = this.state;
 
-    if (entry.ok) {
+        if (!entry.ok)
+            return (<p style={{ fontSize: 'xx-large' }}>Loading...</p>);
+
         console.log('disqus data:', location.href, entry.id, entry.title);
 
         return (
@@ -56,11 +60,6 @@ const Page = ({ entryid }) => {
             </div>
         );
     }
-    else return (
-        <Fragment>
-            <p style={{ fontSize: 'xx-large' }}>Loading...</p>
-        </Fragment>
-    );
 }
 
 export default Page;

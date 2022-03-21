@@ -48,7 +48,7 @@ const BlogEntries = ({ entriesArray }) => {
 
                         :
 
-                        <h3 style={{ textAlign: 'center' }}>No posts found!</h3>
+                        <p style={{ textAlign: 'center', fontSize: 'x-large', filter: 'opacity(20%)' }}>No posts found</p>
                 }
             </div>
         </Fragment>
