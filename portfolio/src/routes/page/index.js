@@ -44,8 +44,8 @@ class Page extends Component {
 
         return (
             <div class={style.page}>
-                <h1>{entry.title}</h1>
-                <p>Published {parseDate(entry.date)}</p>
+                <h1 style={{ marginBottom: "0", marginTop: "0" }}>{entry.title}</h1>
+                <p style={{ filter: "opacity(70%)", margin: "0" }}>{parseDate(entry.date)}</p>
                 <hr />
                 <Markdown markdown={entry.data} markedOpts={markedOpts} />
                 <DiscussionEmbed shortname='grazianobolla'

@@ -30,13 +30,14 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <Router>
-                    <Home path="/" entries={this.state.entryArray} default />
-                    <Blog path="/blog" entries={this.state.entryArray} />
-                    <AboutMe path="/about-me" />
-                    <Page path="/page/:entryid" />
-                </Router>
-                <Footer />
+                <div id="contents">
+                    <Router>
+                        <Home path="/" entries={this.state.entryArray} default />
+                        <Blog path="/blog" entries={this.state.entryArray} />
+                        <AboutMe path="/about-me" />
+                        <Page path="/page/:entryid" />
+                    </Router>
+                </div>
             </div >
         )
     }

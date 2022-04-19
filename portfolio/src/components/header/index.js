@@ -8,7 +8,6 @@ const Header = () => (
             <Link activeClassName={style.active} href="/blog">Blog</Link>
             <Link activeClassName={style.active} href="/about-me">About Me</Link>
         </nav>
-
     </header>
 
 )

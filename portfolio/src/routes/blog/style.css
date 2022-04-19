@@ -1,6 +1,7 @@
 .blog #description {
     font-size: var(--font-size);
     text-align: justify;
+    margin-top: 0;
 }
 
 .entries_list {
@@ -11,7 +12,7 @@
 }
 
 .entries_list a:hover {
-    filter: brightness(85%);
+    text-decoration: underline;
 }
 
 .entry_element {
