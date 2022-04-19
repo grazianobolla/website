@@ -3,9 +3,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 const path = require('path')
+const cors = require('cors')
 const { getEntries, getEntryMeta, getEntryData, generateSitemap, newEntry, updateEntry, deleteEntry } = require('./src/database')
 
 const app = express()
+const corsOpt = { methods: ['POST'], origin: true }
+app.options('/api/save', cors(corsOpt))
+app.options('/api/delete', cors(corsOpt))
 
 app.use(express.static(path.join(__dirname, "static"), { index: false }))
 app.use(bodyParser.json())
@@ -114,8 +118,7 @@ app.get("/api/data", (req, res) => {
     })
 })
 
-
-app.post("/api/save", (req, res) => {
+app.post("/api/save", cors(corsOpt), (req, res) => {
     if (!checkPassword(req.body.password)) {
         res.sendStatus(401)
         return
@@ -142,11 +145,12 @@ app.post("/api/save", (req, res) => {
     }
 })
 
-app.post("/api/delete", (req, res) => {
+app.post("/api/delete", cors(corsOpt), (req, res) => {
     if (!checkPassword(req.body.password)) {
         res.sendStatus(401)
         return
     }
+
     try {
         const id = req.body.id
 
