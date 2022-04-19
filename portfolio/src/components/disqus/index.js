@@ -1,17 +1,17 @@
-import { Component } from 'preact';
-import PropTypes from 'prop-types';
+import { Component } from 'preact'
+import PropTypes from 'prop-types'
 import {
     insertScript,
     removeResources,
     removeScript,
     shallowComparison,
-} from './utils';
+} from './utils'
 // Constants
 import {
     CALLBACKS,
     EMBED_SCRIPT_ID,
     THREAD_ID,
-} from './constants';
+} from './constants'
 
 
 export class DiscussionEmbed extends Component {
@@ -19,84 +19,84 @@ export class DiscussionEmbed extends Component {
     componentDidMount() {
         if (typeof window !== 'undefined' && window.disqus_shortname &&
             window.disqus_shortname !== this.props.shortname)
-            this.cleanInstance();
-        this.loadInstance();
+            this.cleanInstance()
+        this.loadInstance()
     }
 
     shouldComponentUpdate(nextProps) {
         if (this.props === nextProps)
-            return false;
-        return shallowComparison(this.props, nextProps);
+            return false
+        return shallowComparison(this.props, nextProps)
     }
 
     componentDidUpdate(nextProps) {
         if (this.props.shortname !== nextProps.shortname)
-            this.cleanInstance();
-        this.loadInstance();
+            this.cleanInstance()
+        this.loadInstance()
     }
 
     componentWillUnmount() {
-        this.cleanInstance();
+        this.cleanInstance()
     }
 
     loadInstance() {
-        const doc = window.document;
+        const doc = window.document
         if (window && window.DISQUS && doc.getElementById(EMBED_SCRIPT_ID)) {
             window.DISQUS.reset({
                 reload: true,
                 config: this.getDisqusConfig(this.props.config),
-            });
+            })
         } else {
-            window.disqus_config = this.getDisqusConfig(this.props.config);
-            window.disqus_shortname = this.props.shortname;
-            insertScript(`https://${this.props.shortname}.disqus.com/embed.js`, EMBED_SCRIPT_ID, doc.body);
+            window.disqus_config = this.getDisqusConfig(this.props.config)
+            window.disqus_shortname = this.props.shortname
+            insertScript(`https://${this.props.shortname}.disqus.com/embed.js`, EMBED_SCRIPT_ID, doc.body)
         }
     }
 
     cleanInstance() {
-        const doc = window.document;
-        removeScript(EMBED_SCRIPT_ID, doc.body);
+        const doc = window.document
+        removeScript(EMBED_SCRIPT_ID, doc.body)
         if (window && window.DISQUS)
-            window.DISQUS.reset({});
+            window.DISQUS.reset({})
 
         try {
-            delete window.DISQUS;
+            delete window.DISQUS
         } catch (error) {
-            window.DISQUS = undefined;
+            window.DISQUS = undefined
         }
-        const disqusThread = doc.getElementById(THREAD_ID);
+        const disqusThread = doc.getElementById(THREAD_ID)
         if (disqusThread) {
             while (disqusThread.hasChildNodes())
-                disqusThread.removeChild(disqusThread.firstChild);
+                disqusThread.removeChild(disqusThread.firstChild)
         }
-        removeResources();
+        removeResources()
     }
 
     getDisqusConfig(config) {
         return function () {
-            this.page.identifier = config.identifier;
-            this.page.url = config.url;
-            this.page.title = config.title;
-            this.page.category_id = config.categoryID;
-            this.page.remote_auth_s3 = config.remoteAuthS3;
-            this.page.api_key = config.apiKey;
+            this.page.identifier = config.identifier
+            this.page.url = config.url
+            this.page.title = config.title
+            this.page.category_id = config.categoryID
+            this.page.remote_auth_s3 = config.remoteAuthS3
+            this.page.api_key = config.apiKey
             if (config.language)
-                this.language = config.language;
+                this.language = config.language
 
             CALLBACKS.forEach(callbackName => {
                 this.callbacks[callbackName] = [
                     config[callbackName],
-                ];
-            });
-        };
+                ]
+            })
+        }
     }
 
     render() {
         // eslint-disable-next-line no-unused-vars
-        const { shortname, config, ...rest } = this.props;
+        const { shortname, config, ...rest } = this.props
         return (
             <div {...rest} id={THREAD_ID} />
-        );
+        )
     }
 }
 
@@ -121,6 +121,6 @@ DiscussionEmbed.propTypes = {
         onNewComment: PropTypes.func,
         onPaginate: PropTypes.func,
     }).isRequired,
-};
+}
 
-export default DiscussionEmbed;
+export default DiscussionEmbed

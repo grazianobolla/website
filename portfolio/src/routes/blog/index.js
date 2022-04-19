@@ -2,7 +2,7 @@ import style from './style.css'
 
 import { useState, useEffect } from 'preact/hooks'
 import { parseDate } from '../../utils/Utils'
-import { Fragment } from 'preact';
+import { Fragment } from 'preact'
 
 const ListEntry = ({ entryData }) => (
     <a href={`/page/${entryData.id}`} class={style.entry_element}>
@@ -10,25 +10,25 @@ const ListEntry = ({ entryData }) => (
         <p class={style.entry_element} id="title">{entryData.title}</p>
         <p class={style.entry_element} id="date">{parseDate(entryData.date)}</p>
     </a>
-);
+)
 
 const BlogEntries = ({ entriesArray }) => {
-    const [entries, setEntries] = useState([]);
+    const [entries, setEntries] = useState([])
 
-    useEffect(() => { setEntries(entriesArray); }, [entriesArray]);
+    useEffect(() => { setEntries(entriesArray) }, [entriesArray])
 
     function handleInput(e) {
-        const str = e.target.value;
+        const str = e.target.value
         if (str == null || str[0] === ' ')
-            return;
+            return
 
         const finds = entriesArray.filter((element) => {
-            const title = element.title;
-            return title.includes(str);
-        });
+            const title = element.title
+            return title.includes(str)
+        })
 
         if (finds.length != entries.length) {
-            setEntries(finds);
+            setEntries(finds)
         }
     }
 
@@ -43,7 +43,7 @@ const BlogEntries = ({ entriesArray }) => {
                     (entries.length > 0) ?
 
                         entries.map((entry) => {
-                            return (<ListEntry entryData={entry} />);
+                            return (<ListEntry entryData={entry} />)
                         })
 
                         :
@@ -52,8 +52,8 @@ const BlogEntries = ({ entriesArray }) => {
                 }
             </div>
         </Fragment>
-    );
-};
+    )
+}
 
 const Blog = ({ entries }) => (
     <div class={style.blog}>
@@ -61,6 +61,6 @@ const Blog = ({ entries }) => (
         <hr />
         <BlogEntries entriesArray={entries} />
     </div>
-);
+)
 
-export default Blog;
+export default Blog

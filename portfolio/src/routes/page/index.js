@@ -1,46 +1,46 @@
 import Markdown from 'preact-markdown'
-import Prism from 'prismjs';
+import Prism from 'prismjs'
 import { getRemoteData } from '../../utils/Remote'
-import { parseDate } from '../../utils/Utils';
-import { Component } from 'preact';
+import { parseDate } from '../../utils/Utils'
+import { Component } from 'preact'
 
 import '../../styles/mod-prism-okaidia.css'
-import 'prismjs/components/prism-c';
-import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-c'
+import 'prismjs/components/prism-cpp'
 
 import style from './style.css'
-import { DiscussionEmbed } from '../../components/disqus';
+import { DiscussionEmbed } from '../../components/disqus'
 
 const markedOpts =
 {
     highlight(code, lang) {
         if (Prism.languages[lang])
-            return Prism.highlight(code, Prism.languages[lang], lang);
+            return Prism.highlight(code, Prism.languages[lang], lang)
 
-        return Prism.highlight(code, Prism.languages['cpp'], 'cpp');
+        return Prism.highlight(code, Prism.languages['cpp'], 'cpp')
     }
-};
+}
 
 class Page extends Component {
     constructor(props) {
-        super(props);
-        this.state = { ok: false };
+        super(props)
+        this.state = { ok: false }
     }
 
     async componentDidMount() {
-        const info = await getRemoteData(this.props.entryid);
+        const info = await getRemoteData(this.props.entryid)
 
         if (info !== false)
-            this.setState({ ok: true, ...info });
+            this.setState({ ok: true, ...info })
     }
 
     render() {
-        const entry = this.state;
+        const entry = this.state
 
         if (!entry.ok)
-            return (<p style={{ fontSize: 'xx-large' }}>Loading...</p>);
+            return (<p style={{ fontSize: 'xx-large' }}>Loading...</p>)
 
-        console.log('disqus data:', location.href, entry.id, entry.title);
+        console.log('disqus data:', location.href, entry.id, entry.title)
 
         return (
             <div class={style.page}>
@@ -58,8 +58,8 @@ class Page extends Component {
                         }
                     } />
             </div>
-        );
+        )
     }
 }
 
-export default Page;
+export default Page

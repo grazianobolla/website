@@ -24,6 +24,6 @@ const AboutMe = () => (
             </p>
         </div>
     </Fragment>
-);
+)
 
-export default AboutMe;
+export default AboutMe

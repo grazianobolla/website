@@ -11,10 +11,10 @@ const Entry = ({ title, image, id }) => (
             <p>{title}</p>
         </a>
     </div>
-);
+)
 
 const EntryGrid = ({ entries }) => {
-    const latestEntries = entries.slice(-3);
+    const latestEntries = entries.slice(-3)
 
     return (
         <div class={style.entrygrid}>
@@ -24,7 +24,7 @@ const EntryGrid = ({ entries }) => {
                 })
             }
         </div>
-    );
+    )
 }
 
 const Externals = () => (
@@ -44,7 +44,7 @@ const Externals = () => (
             <p>Discord</p>
         </a>
     </div>
-);
+)
 
 const Home = ({ entries }) => {
     return (
@@ -69,7 +69,7 @@ const Home = ({ entries }) => {
             <p style={{ textAlign: 'left', fontSize: 'var(--font-size)', marginBottom: '0px' }}>Latest posts:</p>
             <EntryGrid entries={entries} />
         </div>
-    );
+    )
 }
 
-export default Home;
+export default Home
