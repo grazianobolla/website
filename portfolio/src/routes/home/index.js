@@ -30,7 +30,7 @@ const EntryGrid = ({ entries }) => {
 const Externals = () => (
     <div class={style.externals}>
         <a href='https://github.com/grazianobolla'>
-            <img src={githubPicture} alt='My Github Page' />
+            <img src={githubPicture} alt='My Github Page' style={{ filter: "invert(var(--invert-amount))" }} />
             <p>Github</p>
         </a>
 
@@ -49,8 +49,9 @@ const Externals = () => (
 const Home = ({ entries }) => {
     return (
         <div class={style.home}>
+            <h1 class={style.welcome}>Welcome to my internet slice</h1>
             <p class={style.welcome_text}>
-                Welcome to my internet slice. Here you will find a collection of projects containing explanations, downloads and videos.
+                Here you will find a collection of projects containing explanations, downloads and videos.
             </p>
             <br />
 

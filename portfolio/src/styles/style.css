@@ -3,32 +3,31 @@
 :root {
   --def-border-rad: 0px;
   --font-size: 20px;
-}
-
-:root {
-  --primary: hsl(213, 22%, 40%);
+  --primary: #635c8a;
   --highlight: #00000000;
-  --background: #ececec;
-  --gray: #303030;
-  --footer: #272727;
-  --font: #363636;
-  --font-negative: #f7f7f7;
-  --page-background: #fafafa;
 }
 
-/* 
-[data-theme="light"] {
-  --primary: #645a8f;
-  --highlight: rgba(0, 0, 0, 0);
-  --background: #fff;
-  --footer: #f3f3f3;
-  --font: #262626;
-  --font-negative: #fff;
+/* :root {
+  --background: hsl(0, 0%, 85%);
+  --page-background: hsl(0, 0%, 95%);
+  --footer: #2e2e2e;
+  --font: #303030;
+  --font-negative: #f7f7f7;
+  --invert-amount: 20%;
 } */
 
+:root {
+  --background: hsl(0, 0%, 10%);
+  --page-background: hsl(0, 0%, 15%);
+  --footer: #272727;
+  --font: #e7e7e7;
+  --font-negative: #f7f7f7;
+  --invert-amount: 100%;
+}
+
 #contents{
-  margin-top: 16px;
   background-color: var(--page-background);
+  margin-top: 8px;
   padding: 16px 32px 16px 32px;
 }
 
