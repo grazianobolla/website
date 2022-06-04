@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "URL_PATH=/ preact build",
+    "build": "URL_PATH=/ API_URL=http://localhost:8080/api preact build",
     "serve": "sirv build --port 8080 --cors --single",
     "dev": "URL_PATH=/ preact watch",
     "lint": "eslint src"

@@ -1,18 +1,11 @@
 require('dotenv').config()
 const express = require('express')
-const bodyParser = require('body-parser')
 const fs = require('fs')
 const path = require('path')
-const cors = require('cors')
-const { getEntries, getEntryMeta, getEntryData, generateSitemap, newEntry, updateEntry, deleteEntry } = require('./src/database')
+const { getEntries, getEntryMeta, getEntryData, generateSitemap } = require('./src/database')
 
 const app = express()
-const corsOpt = { methods: ['POST'], origin: true }
-app.options('/api/save', cors(corsOpt))
-app.options('/api/delete', cors(corsOpt))
-
-app.use(express.static(path.join(__dirname, "static"), { index: false }))
-app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, "build"), { index: false }))
 
 function replaceMeta(filepath, meta, callback) {
     const { title, description, URL, canonURL, image } = meta
@@ -32,16 +25,12 @@ function replaceMeta(filepath, meta, callback) {
     })
 }
 
-function checkPassword(str) {
-    return (str === process.env.ADMIN_PASSWORD)
-}
-
 //sites
 app.get("/:var(blog|about-me|)", (req, res) => {
     res.set('Access-Control-Allow-Origin', '*')
     res.set('Content-Type', 'text/html')
 
-    const filepath = path.join(__dirname, "static/index.html")
+    const filepath = path.join(__dirname, "build/index.html")
 
     const meta = {
         title: `Portfolio | ${process.env.DEFAULT_TITLE}`,
@@ -67,7 +56,7 @@ app.get("/page/:entryid", (req, res) => {
             return
         }
 
-        const filepath = path.join(__dirname, "static/index.html")
+        const filepath = path.join(__dirname, "build/index.html")
 
         const meta = {
             title: metadata.title,
@@ -116,51 +105,6 @@ app.get("/api/data", (req, res) => {
     getEntryData(req.query.entryid || 'null', data => {
         res.send(JSON.stringify(data))
     })
-})
-
-app.post("/api/save", cors(corsOpt), (req, res) => {
-    if (!checkPassword(req.body.password)) {
-        res.sendStatus(401)
-        return
-    }
-
-    try {
-        const data = req.body.data
-
-        if (data.id === '-1') {
-            newEntry(data, ok => {
-                if (ok) res.status(200).send('Created new entry ' + data.title)
-                else res.status(500).send('Could not create entry')
-            })
-
-            return
-        }
-
-        updateEntry(data, ok => {
-            if (ok) res.status(200).send('Updated entry ' + data.title)
-            else res.status(500).send('Could not update entry')
-        })
-    } catch {
-        res.status(500).send('Error bad data')
-    }
-})
-
-app.post("/api/delete", cors(corsOpt), (req, res) => {
-    if (!checkPassword(req.body.password)) {
-        res.sendStatus(401)
-        return
-    }
-
-    try {
-        const id = req.body.id
-
-        deleteEntry(id, ok => {
-            if (ok) res.status(200).send('Deleted entry')
-            else res.status(500).send('Could not delete entry')
-        })
-    } catch {
-        res.status(500).send('Error bad data')
-    }
 })
 
 app.all('*', function (req, res) {
